@@ -12,7 +12,7 @@ const ButtonFields = ({ fetchGptCompletions, startRecording, stopRecording }: Bu
     <div className="button-wrapper">
       <Button data-testid="button-start" onClick={startRecording} text="Start" buttonstyle="start" />
       <Button data-testid="button-stop" onClick={stopRecording} text="Stop" buttonstyle="stop" />
-      <Button data-testid="button-gpt" onClick={() => fetchGptCompletions()} text="Gpt response" buttonstyle="gpt" />
+      <Button data-testid="button-gpt" onClick={() => fetchGptCompletions()} text="Send" buttonstyle="gpt" />
     </div>
   )
 }

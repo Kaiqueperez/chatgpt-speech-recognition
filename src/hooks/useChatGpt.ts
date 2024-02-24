@@ -3,8 +3,14 @@ import { chatgpt } from '../config'
 
 export const useChatGpt = (userSpeechContent: string) => {
   const [chatGptResponse, setChatGptResponse] = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleIsLoading = () => setIsLoading(prev => !prev)
 
   const fetchGptCompletions = async () => {
+
+    handleIsLoading()
+
     const stream = await chatgpt.chat.completions.create({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: userSpeechContent }],
@@ -15,11 +21,13 @@ export const useChatGpt = (userSpeechContent: string) => {
 
     if (gptResponse) {
       setChatGptResponse([...chatGptResponse, gptResponse])
+      handleIsLoading()
     }
   }
 
   return {
     fetchGptCompletions,
     chatGptResponse,
+    isLoading
   }
 }

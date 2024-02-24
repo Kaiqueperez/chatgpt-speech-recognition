@@ -5,7 +5,7 @@ import { useSpeechRecogniton } from './hooks/useSpeechRecogniton'
 
 function App() {
   const { startRecording, stopRecording, recognitionResult, isListening, hasSpeechRecogniton } = useSpeechRecogniton()
-  const { chatGptResponse, fetchGptCompletions } = useChatGpt(recognitionResult)
+  const { chatGptResponse, fetchGptCompletions, isLoading } = useChatGpt(recognitionResult)
 
   return !hasSpeechRecogniton ? (
     <span>Seu navegadro não suporta o recurso de gravação de voz </span>
@@ -16,10 +16,11 @@ function App() {
         <ButtonFields startRecording={startRecording} stopRecording={stopRecording} fetchGptCompletions={fetchGptCompletions} />
         <span>{isListening ? 'Gravação iniciada' : 'Clique em START para começar a gravar'}</span>
 
-        <div>
+        <div className="gpt-messages-wrapper">
           {chatGptResponse.map((message, index) => (
             <p key={index}>{message}</p>
           ))}
+          <p>{isLoading ? 'Loading response...' : ''}</p>
         </div>
       </section>
     </div>

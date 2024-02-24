@@ -14,3 +14,10 @@ textarea {
   padding: 16px;
   border-radius: 16px;
 }
+
+.gpt-messages-wrapper{
+  display: flex;
+  max-width: 800px;
+  flex-direction: column;
+  align-items: center;
+}
