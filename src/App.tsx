@@ -1,11 +1,11 @@
-import './App.css';
-import { useSpeechRecogniton } from './hooks/useSpeechRecogniton';
-import { useChatGpt } from './hooks/useChatGpt';
-import ButtonFields  from './components/ButtonFields';
+import './App.css'
+import ButtonFields from './components/ButtonFields'
+import { useChatGpt } from './hooks/useChatGpt'
+import { useSpeechRecogniton } from './hooks/useSpeechRecogniton'
 
 function App() {
-  const { startRecording, stopRecording, recognitionResult, isListening, hasSpeechRecogniton } = useSpeechRecogniton();
-  const { chatGptResponse, fetchGptCompletions } = useChatGpt(recognitionResult);
+  const { startRecording, stopRecording, recognitionResult, isListening, hasSpeechRecogniton } = useSpeechRecogniton()
+  const { chatGptResponse, fetchGptCompletions } = useChatGpt(recognitionResult)
 
   return !hasSpeechRecogniton ? (
     <span>Seu navegadro não suporta o recurso de gravação de voz </span>
@@ -23,7 +23,7 @@ function App() {
         </div>
       </section>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
