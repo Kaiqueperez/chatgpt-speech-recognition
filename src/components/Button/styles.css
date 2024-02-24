@@ -1,0 +1,17 @@
+button {
+  padding: 16px;
+  border-radius: 16px;
+  min-width: 120px;
+  border: none;
+  cursor: pointer;
+}
+
+.button-start {
+  background-color: lightgreen;
+}
+.button-stop {
+  background-color: lightcoral;
+}
+.button-gpt {
+  background-color: lightslategray;
+}

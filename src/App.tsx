@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useSpeechRecogniton } from './hooks/useSpeechRecogniton';
+import { useChatGpt } from './hooks/useChatGpt';
+import ButtonFields  from './components/ButtonFields';
 
 function App() {
-  return (
+  const { startRecording, stopRecording, recognitionResult, isListening, hasSpeechRecogniton } = useSpeechRecogniton();
+  const { chatGptResponse, fetchGptCompletions } = useChatGpt(recognitionResult);
+
+  return !hasSpeechRecogniton ? (
+    <span>Seu navegadro não suporta o recurso de gravação de voz </span>
+  ) : (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <section className="App-header">
+        <textarea cols={50} rows={20} name="gpt-input" id="gpt-input" onChange={() => undefined} value={recognitionResult} />
+        <ButtonFields startRecording={startRecording} stopRecording={stopRecording} fetchGptCompletions={fetchGptCompletions} />
+        <span>{isListening ? 'Gravação iniciada' : 'Clique em START para começar a gravar'}</span>
+
+        <div>
+          {chatGptResponse.map((message, index) => (
+            <p key={index}>{message}</p>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
